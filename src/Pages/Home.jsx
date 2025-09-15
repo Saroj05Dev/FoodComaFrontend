@@ -5,9 +5,13 @@ import CookImage from "../assets/Images/CookImage.png"
 import OrderFood from "../assets/Images/orderFood (1).png"
 import Enjoy from "../assets/Images/enjoy (1).png"
 import Pickup from "../assets/Images/pickup (1).png"
+import Layout from "../Layouts/Layout";
 
 function Home () {
     return (
+        <Layout>
+
+        
         <div>
             {/* Hero Section */}
             <section
@@ -164,6 +168,7 @@ function Home () {
             </section>
 
         </div>
+        </Layout>
     )
 }
 
