@@ -3,10 +3,12 @@ import Footer from "../Components/Footer";
 import FoodComaLogo from "../assets/Images/FoodComaLogo.png"
 import { logout } from "../Redux/Slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
+import CartIcon from "../assets/Images/cart.svg"
 
 function Layout({ children }) {
 
     const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const { cartsData } = useSelector((state) => state.cart)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -55,6 +57,18 @@ function Layout({ children }) {
                                 <Link to={'/auth/login'}>Login</Link>
                             )}
                         </li>
+
+                        {isLoggedIn && (
+                            <Link to={'/carts'}>
+                                <li>
+                                    <img src={CartIcon} className='w-8 h-8 inline' />
+                                    {' '}
+                                    <p className='text-black inline'>{cartsData?.items?.length}</p>
+                                </li>
+                            </Link>
+                            
+                        )}
+
                     </ul>
                 </div>
 

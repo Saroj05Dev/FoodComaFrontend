@@ -7,6 +7,8 @@ import NotFound from './Pages/NotFound'
 import Denied from './Pages/Denied'
 import AddProduct from './Pages/Admin/AddProduct'
 import Products from './Pages/Products'
+import ProductDetails from './Pages/ProductDetails'
+import CartDetails from './Pages/Cart/CartDetails.'
 
 function App() {
 
@@ -18,6 +20,8 @@ function App() {
         <Route path='/auth/signup' element={<Signup />} />
         <Route path='/auth/login' element={<Login />} />
         <Route path='/products' element={<Products />} />
+        <Route path='/products/:productId' element={<ProductDetails />} />
+        <Route path='/carts' element={<CartDetails />} />
 
         <Route path='/admin/add-product' element={<AddProduct />} />
 
