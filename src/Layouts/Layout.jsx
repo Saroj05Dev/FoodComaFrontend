@@ -1,7 +1,19 @@
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "../Components/Footer";
 import FoodComaLogo from "../assets/Images/FoodComaLogo.png"
+import { logout } from "../Redux/Slices/authSlice";
+import { Link } from "react-router-dom";
 
 function Layout({ children }) {
+
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+    const dispatch = useDispatch();
+
+    async function handleLogout(e) {
+        e.preventDefault();
+        dispatch(logout());
+    }
+
     return (
         <div>
 
@@ -30,6 +42,18 @@ function Layout({ children }) {
                             <p>About {' '}</p>
                         </li>
 
+                    </ul>
+                </div>
+
+                <div>
+                    <ul className='flex gap-4'>
+                        <li className='hover:text-[#FF9110]'>
+                            {isLoggedIn ? (
+                                <Link onClick={handleLogout}>Logout</Link>
+                            ) : (
+                                <Link to={'/auth/login'}>Login</Link>
+                            )}
+                        </li>
                     </ul>
                 </div>
 
