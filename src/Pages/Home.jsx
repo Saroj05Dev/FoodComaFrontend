@@ -6,12 +6,14 @@ import OrderFood from "../assets/Images/orderFood (1).png"
 import Enjoy from "../assets/Images/enjoy (1).png"
 import Pickup from "../assets/Images/pickup (1).png"
 import Layout from "../Layouts/Layout";
+import { useNavigate } from "react-router-dom";
 
 function Home () {
+
+    const navigate = useNavigate();
+
     return (
         <Layout>
-
-        
         <div>
             {/* Hero Section */}
             <section
@@ -40,6 +42,7 @@ function Home () {
 
                     <button
                         className="flex items-center px-4 py-2 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group"
+                        onClick={() => navigate("/products")}
                     >
                         Order Now 
                         <span className="inline-block ml-3 transition-transform ease-in-out group-hover:translate-x-2">

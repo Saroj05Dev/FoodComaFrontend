@@ -6,6 +6,7 @@ import Login from './Pages/Auth/Login'
 import NotFound from './Pages/NotFound'
 import Denied from './Pages/Denied'
 import AddProduct from './Pages/Admin/AddProduct'
+import Products from './Pages/Products'
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/' element={<Denied />} />
         <Route path='/auth/signup' element={<Signup />} />
         <Route path='/auth/login' element={<Login />} />
+        <Route path='/products' element={<Products />} />
 
         <Route path='/admin/add-product' element={<AddProduct />} />
 
