@@ -131,7 +131,7 @@ function CartDetails() {
                   </div>
                   {cartDetails?.items.length > 0 && (
                     <Link
-                      to={'/order'}
+                      to={'/orders'}
                       className="flex justify-center text-white bg-yellow-400 border border-yellow-500 rounded-md hover:bg-yellow-700"
                     >
                       Proceed to Checkout

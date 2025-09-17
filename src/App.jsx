@@ -9,6 +9,9 @@ import AddProduct from './Pages/Admin/AddProduct'
 import Products from './Pages/Products'
 import ProductDetails from './Pages/ProductDetails'
 import CartDetails from './Pages/Cart/CartDetails.'
+import Order from './Pages/Order/Order'
+import OrderSuccess from './Pages/Order/OrderSuccess'
+import RequireAuth from './Components/Auth/RequireAuth'
 
 function App() {
 
@@ -19,9 +22,15 @@ function App() {
         <Route path='/' element={<Denied />} />
         <Route path='/auth/signup' element={<Signup />} />
         <Route path='/auth/login' element={<Login />} />
-        <Route path='/products' element={<Products />} />
-        <Route path='/products/:productId' element={<ProductDetails />} />
-        <Route path='/carts' element={<CartDetails />} />
+
+        <Route element={<RequireAuth />} >
+          <Route path='/products' element={<Products />} />
+          <Route path='/products/:productId' element={<ProductDetails />} />
+          <Route path='/carts' element={<CartDetails />} />
+          <Route path='/orders' element={<Order />} />
+          <Route path='/orders/success' element={<OrderSuccess />} />
+        </Route>
+
 
         <Route path='/admin/add-product' element={<AddProduct />} />
 

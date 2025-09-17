@@ -4,6 +4,8 @@ import FoodComaLogo from "../assets/Images/FoodComaLogo.png"
 import { logout } from "../Redux/Slices/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import CartIcon from "../assets/Images/cart.svg"
+import { useEffect } from "react";
+import { getCartDetails } from "../Redux/Slices/cartSlice";
 
 function Layout({ children }) {
 
@@ -16,6 +18,20 @@ function Layout({ children }) {
         e.preventDefault();
         dispatch(logout());
     }
+
+     async function fetchCartDetails() {
+        const res = await dispatch(getCartDetails());
+        if(res?.payload?.isUnauthorized) {
+            dispatch(logout());
+        }
+    }
+
+    useEffect(() => {
+        console.log(typeof(isLoggedIn))
+        if(isLoggedIn) {
+            fetchCartDetails();
+        }
+    }, []);
 
     return (
         <div>
