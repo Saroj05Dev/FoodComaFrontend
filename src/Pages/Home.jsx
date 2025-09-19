@@ -33,7 +33,7 @@ function Home () {
                     </p>
 
                     <button
-                        className="flex items-center px-4 py-2 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group"
+                        className="flex items-center px-4 py-2 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 group cursor-pointer"
                         onClick={() => navigate("/products")}
                     >
                         Order Now 

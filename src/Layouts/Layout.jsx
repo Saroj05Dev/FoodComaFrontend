@@ -38,7 +38,7 @@ function Layout({ children }) {
 
             <nav className="flex items-center justify-around h-16 text-[#6B7280] font-mono border-none shadow-md">
 
-                <div className="flex items-center justify-center" onClick={() => navigate("/")}>
+                <div className="flex items-center justify-center cursor-pointer" onClick={() => navigate("/")}>
                     <p>Pizza App</p>
                     <img width={70} height={70} src={FoodComaLogo} alt="Pizza logo" />
                 </div>
@@ -46,16 +46,16 @@ function Layout({ children }) {
                 <div className='hidden md:block'>
                     <ul className='flex gap-4'>
 
-                        <li className='hover:text-[#FF9110]'>
+                        <li onClick={() => navigate("/menu")} className='hover:text-[#FF9110] cursor-pointer'>
                             { ' ' }
                             <p>Menu {' '}</p>
                         </li>
-                        <li onClick={() => navigate("/services")} className='hover:text-[#FF9110]'>
+                        <li onClick={() => navigate("/services")} className='hover:text-[#FF9110] cursor-pointer'>
                             { ' ' }
                             <p>Services {' '}</p>
                         </li>
 
-                        <li onClick={() => navigate("/about")} className='hover:text-[#FF9110]'>
+                        <li onClick={() => navigate("/about")} className='hover:text-[#FF9110] cursor-pointer'>
                             { ' ' }
                             <p>About {' '}</p>
                         </li>
