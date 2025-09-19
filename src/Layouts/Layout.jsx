@@ -50,13 +50,12 @@ function Layout({ children }) {
                             { ' ' }
                             <p>Menu {' '}</p>
                         </li>
-
-                        <li className='hover:text-[#FF9110]'>
+                        <li onClick={() => navigate("/services")} className='hover:text-[#FF9110]'>
                             { ' ' }
                             <p>Services {' '}</p>
                         </li>
 
-                        <li className='hover:text-[#FF9110]'>
+                        <li onClick={() => navigate("/about")} className='hover:text-[#FF9110]'>
                             { ' ' }
                             <p>About {' '}</p>
                         </li>
