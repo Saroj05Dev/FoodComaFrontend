@@ -12,7 +12,7 @@ export const placeOrder = createAsyncThunk('/order/placeOrder', async (orderData
         toast.promise(response, {
             loading: 'Creating order',
             error: 'Something went wrong cannot create order',
-            success: 'Order created successfully',
+            // success: 'Order created successfully',
         });
         const apiResponse = await response;
         return apiResponse;

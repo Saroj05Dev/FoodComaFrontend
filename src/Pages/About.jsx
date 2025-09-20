@@ -3,7 +3,7 @@ import Layout from "../Layouts/Layout";
 function About() {
   return (
     <Layout>
-      <section className="py-16 bg-gradient-to-b from-yellow-50 to-white">
+      <section className="py-16 bg-gradient-to-b to-white">
         <div className="max-w-6xl mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-6">About FoodComma 🍕</h2>
           <p className="text-lg text-gray-600 mb-12 max-w-3xl mx-auto">
