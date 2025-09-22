@@ -17,7 +17,7 @@ const Products = () => {
 
   const filteredProducts = productsData
     ?.filter((p) => (filter === "all" ? true : p.category?.toLowerCase() === filter))
-    ?.filter((p) => p.title.toLowerCase().includes(search.toLowerCase()));
+    ?.filter((p) => p?.title?.toLowerCase().includes(search.toLowerCase()));
 
   return (
     <Layout>
