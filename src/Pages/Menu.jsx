@@ -1,31 +1,35 @@
 import React from "react";
 import Layout from "../Layouts/Layout";
 import { Link } from "react-router-dom";
+import vegPizza from "../assets/Images/veg-pizza.jpg";
+import nonVegPizza from "../assets/Images/non-veg-pizza.jpg";
+import drinksImage from "../assets/Images/drinksimage.jpg";
+import friesImage from "../assets/Images/fries.jpg";
 
 function Menu() {
   const menuCategories = [
     {
       name: "Veg Pizzas",
       description: "Delicious vegetarian pizzas with fresh toppings.",
-      image: "../../src/assets/Images/veg-pizza.jpg",
+      image: vegPizza,
       link: "/products?category=veg",
     },
     {
       name: "Non-Veg Pizzas",
       description: "Juicy chicken and meat loaded pizzas.",
-      image: "../../src/assets/Images/non-veg-pizza.jpg",
+      image: nonVegPizza,
       link: "/products?category=non-veg",
     },
     {
       name: "Drinks",
       description: "Chilled beverages to go with your meal.",
-      image: "../../src/assets/Images/drinksimage.jpg",
+      image: drinksImage,
       link: "/products?category=drinks",
     },
     {
       name: "Sides",
       description: "Garlic bread, fries, and more snacks.",
-      image: "../../src/assets/Images/fries.jpg",
+      image: friesImage,
       link: "/products?category=sides",
     },
   ];
