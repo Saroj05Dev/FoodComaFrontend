@@ -99,18 +99,12 @@ It features a modern **UI design**, **Redux Toolkit state management**, secure *
 ├── README.md
 └── package.json
 
-yaml
-Copy code
-
 ---
 
 ## Environment Variables
 
 ### Frontend (`.env`)
 VITE_BACKEND_URL="your backend api url"
-
-shell
-Copy code
 
 ### Backend (`.env`)
 PORT=5000
@@ -119,9 +113,6 @@ JWT_SECRET="your jwt secret"
 CLOUDINARY_API_KEY="your cloudinary api key"
 CLOUDINARY_API_SECRET="your cloudinary api secret"
 CLOUDINARY_CLOUD_NAME="your cloudinary name"
-
-yaml
-Copy code
 
 ---
 
@@ -133,17 +124,11 @@ cd FoodComaFrontend
 npm install
 npm run dev
 
-shell
-Copy code
-
 ### Clone and Setup Backend
 git clone https://github.com/Saroj05Dev/FoodComaBackend.git
 cd FoodComaBackend
 npm install
 npm start
-
-yaml
-Copy code
 
 ---
 
