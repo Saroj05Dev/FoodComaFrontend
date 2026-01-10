@@ -16,15 +16,20 @@ export function useServerHealthCheck() {
 
     const checkServerHealth = async () => {
       const startTime = Date.now();
+      let toastId;
 
       try {
         // Show loading toast
-        const toastId = toast.loading("Connecting to server...", {
-          duration: 30000, // 30 seconds max
-        });
+        toastId = toast.loading(
+          "Connecting to server... This may take up to a minute if the server is starting.",
+          {
+            duration: 90000, // 90 seconds for Render cold start
+          }
+        );
 
-        const response = await axiosInstance.get("/ping", {
-          timeout: 30000, // 30 second timeout
+        // Use /products endpoint since /ping doesn't exist
+        const response = await axiosInstance.get("/products", {
+          timeout: 90000, // 90 second timeout for cold starts
         });
 
         const responseTime = Date.now() - startTime;
@@ -32,8 +37,8 @@ export function useServerHealthCheck() {
         // Dismiss loading toast
         toast.dismiss(toastId);
 
-        // If server took more than 3 seconds, it was likely cold starting
-        if (responseTime > 3000) {
+        // If server took more than 5 seconds, it was likely cold starting
+        if (responseTime > 5000) {
           toast.success("Server is now ready! Thanks for your patience.", {
             duration: 4000,
           });
@@ -45,12 +50,28 @@ export function useServerHealthCheck() {
         }
       } catch (error) {
         // Dismiss loading toast
-        toast.dismiss();
+        if (toastId) toast.dismiss(toastId);
 
-        // Show error toast
-        toast.error("Server connection failed. Please refresh the page.", {
-          duration: 6000,
-        });
+        // Check if it's a timeout error
+        if (
+          error.code === "ECONNABORTED" ||
+          error.message?.includes("timeout")
+        ) {
+          toast.error(
+            "Server is taking longer than expected. Please wait a moment and try refreshing.",
+            {
+              duration: 8000,
+            }
+          );
+        } else {
+          // Other errors
+          toast.error(
+            "Unable to connect to server. Please check your connection and try again.",
+            {
+              duration: 6000,
+            }
+          );
+        }
 
         console.error("Server health check failed:", error);
       }
