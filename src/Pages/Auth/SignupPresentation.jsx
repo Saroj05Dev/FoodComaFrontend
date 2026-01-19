@@ -257,43 +257,6 @@ function SignUpPresentation({ handleUserInput, handleFormSubmit }) {
                 </p>
               </div>
 
-              <div className="relative mb-4">
-                <label
-                  htmlFor="role"
-                  className="text-sm leading-7 text-gray-600"
-                >
-                  Role <span className="text-red-500">*</span>
-                </label>
-                <select
-                  id="role"
-                  name="role"
-                  required
-                  onChange={handleUserInput}
-                  defaultValue="USER"
-                  className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200"
-                >
-                  <option value="USER">User</option>
-                  <option value="ADMIN">Admin</option>
-                </select>
-              </div>
-
-              <div className="relative mb-4">
-                <label
-                  htmlFor="address"
-                  className="text-sm leading-7 text-gray-600"
-                >
-                  Address
-                </label>
-                <textarea
-                  id="address"
-                  name="address"
-                  onChange={handleUserInput}
-                  rows={3}
-                  placeholder="Enter your address (optional)"
-                  className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 resize-none"
-                />
-              </div>
-
               <button
                 onClick={handleFormSubmit}
                 className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"

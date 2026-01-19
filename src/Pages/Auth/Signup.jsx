@@ -15,8 +15,6 @@ function Signup() {
     email: "",
     mobileNumber: "",
     password: "",
-    role: "USER",
-    address: "",
   });
 
   function handleUserInput(e) {
