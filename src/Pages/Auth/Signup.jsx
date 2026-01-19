@@ -6,65 +6,98 @@ import { useNavigate } from "react-router-dom";
 import { createAccount } from "../../Redux/Slices/authSlice";
 
 function Signup() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const [signUpState, setSignUpState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    mobileNumber: "",
+    password: "",
+    role: "USER",
+    address: "",
+  });
 
-    const [signUpState, setSignUpState] = useState({
-        firstName: '',
-        email: '',
-        mobileNumber: '',
-        password: ''
+  function handleUserInput(e) {
+    const { name, value } = e.target;
+    setSignUpState({
+      ...signUpState,
+      [name]: value,
     });
+  }
 
-    function handleUserInput(e) {
-       const {name, value} = e.target;
-       setSignUpState({
-        ...signUpState,
-        [name]: value
-       })
+  async function handleFormSubmit(e) {
+    e.preventDefault(); // prevent the form from reloading the page
+    console.log(signUpState);
+
+    // Validate required fields
+    if (
+      !signUpState.email ||
+      !signUpState.mobileNumber ||
+      !signUpState.password ||
+      !signUpState.firstName
+    ) {
+      toast.error("Please fill all required fields");
+      return;
     }
 
-    async function handleFormSubmit(e) {
-        e.preventDefault(); // prevent the form from reloading the page
-        console.log(signUpState);
-
-        // Add validations for the form input
-        if(!signUpState.email || !signUpState.mobileNumber || !signUpState.password || !signUpState.firstName) {
-            toast.error("Missing values from the form")
-            return;
-        }
-
-        if(signUpState.firstName.length < 5 || signUpState.firstName.length > 20) {
-            toast.error("First name should be atleast 5 characters long and maximum 20 characters long")
-            return;
-        }
-
-        // check email
-        if(!signUpState.email.includes('@') || !signUpState.email.includes('.')) {
-            toast.error("Invalid email address")
-            return;
-        }
-
-        // check mobile number length to be between 10-12
-        if(signUpState.mobileNumber.length < 10 || signUpState.mobileNumber.length > 12) {
-            toast.error("Mobile number should be between 10-12 characters")
-            return;
-        }
-
-        const apiResponse = await dispatch(createAccount(signUpState));
-        console.log("api response", apiResponse);
-        if(apiResponse.payload.data.success) {
-            navigate("/auth/login");
-        }
+    // Validate firstName (3-15 characters as per backend schema)
+    if (signUpState.firstName.length < 3 || signUpState.firstName.length > 15) {
+      toast.error("First name must be between 3 and 15 characters long");
+      return;
     }
 
-    return (
-        <SignUpPresentation 
-            handleUserInput={handleUserInput}
-            handleFormSubmit={handleFormSubmit}
-        />
-    )
+    // Validate lastName if provided (3-15 characters as per backend schema)
+    if (
+      signUpState.lastName &&
+      (signUpState.lastName.length < 3 || signUpState.lastName.length > 15)
+    ) {
+      toast.error("Last name must be between 3 and 15 characters long");
+      return;
+    }
+
+    // Validate email with proper regex (matching backend pattern)
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(signUpState.email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    // Validate mobile number (exactly 10 digits as per backend schema)
+    if (signUpState.mobileNumber.length !== 10) {
+      toast.error("Mobile number must be exactly 10 digits long");
+      return;
+    }
+
+    // Validate mobile number contains only digits
+    if (!/^\d+$/.test(signUpState.mobileNumber)) {
+      toast.error("Mobile number must contain only digits");
+      return;
+    }
+
+    // Validate password (matching backend pattern: 8+ chars, uppercase, lowercase, number/special char)
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*(\d|\W)).{8,}$/;
+    if (!passwordRegex.test(signUpState.password)) {
+      toast.error(
+        "Password must have at least 8 characters, one uppercase, one lowercase, and one number or special character"
+      );
+      return;
+    }
+
+    const apiResponse = await dispatch(createAccount(signUpState));
+    console.log("api response", apiResponse);
+    if (apiResponse.payload.data.success) {
+      navigate("/auth/login");
+    }
+  }
+
+  return (
+    <SignUpPresentation
+      handleUserInput={handleUserInput}
+      handleFormSubmit={handleFormSubmit}
+    />
+  );
 }
 
 export default Signup;
