@@ -93,7 +93,8 @@ function Signup() {
     console.log("api response", apiResponse);
 
     // Check if the request was successful
-    if (apiResponse?.payload?.data?.success) {
+    // Since thunk returns response.data, we check payload.success directly
+    if (apiResponse?.payload?.success) {
       navigate("/auth/login");
     } else if (apiResponse?.error) {
       // Error is already shown by toast.promise in authSlice
