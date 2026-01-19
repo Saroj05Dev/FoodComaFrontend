@@ -6,49 +6,57 @@ import { login } from "../../Redux/Slices/authSlice";
 import toast from "react-hot-toast";
 
 function Login() {
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const [loginData, setLoginData] = useState({
-        email: '',
-        password: ''
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+
+  function handleUserInput(e) {
+    const { name, value } = e.target;
+    setLoginData({
+      ...loginData,
+      [name]: value,
     });
-    function handleUserInput(e) {
-        const {name, value} = e.target;
-        setLoginData({
-         ...loginData,
-         [name]: value
-        })
+  }
+
+  async function handleFormSubmit(e) {
+    e.preventDefault(); // prevent the form from reloading the page
+    console.log(loginData);
+
+    // Validate required fields
+    if (!loginData.email || !loginData.password) {
+      toast.error("Please fill all required fields");
+      return;
     }
 
-    async function handleFormSubmit(e) {
-        e.preventDefault(); // prevent the form from reloading the page
-        console.log(loginData);
-
-        // Add validations for the form input
-        if(!loginData.email || !loginData.password ) {
-            toast.error("Missing values from the form")
-            return;
-        }
-
-        // check email
-        if(!loginData.email.includes('@') || !loginData.email.includes('.')) {
-            toast.error("Invalid email address")
-            return;
-        }
-
-        const apiReponse = await dispatch(login(loginData));
-        console.log("Api response", apiReponse);
-        if(apiReponse.payload.data.success) {
-            navigate('/');
-        }
+    // Validate email with proper regex (matching backend pattern)
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailRegex.test(loginData.email)) {
+      toast.error("Please enter a valid email address");
+      return;
     }
 
-    return (
-        <LoginPresentation 
-            handleFormSubmit={handleFormSubmit}
-            handleUserInput={handleUserInput}
-        />
-    )
+    // Validate password minimum length
+    if (loginData.password.length < 8) {
+      toast.error("Password must be at least 8 characters long");
+      return;
+    }
+
+    const apiReponse = await dispatch(login(loginData));
+    console.log("Api response", apiReponse);
+    if (apiReponse.payload.data.success) {
+      navigate("/");
+    }
+  }
+
+  return (
+    <LoginPresentation
+      handleFormSubmit={handleFormSubmit}
+      handleUserInput={handleUserInput}
+    />
+  );
 }
 
 export default Login;
