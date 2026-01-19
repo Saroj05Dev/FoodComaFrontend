@@ -49,8 +49,13 @@ function Login() {
 
     const apiReponse = await dispatch(login(loginData));
     console.log("Api response", apiReponse);
-    if (apiReponse.payload.data.success) {
+
+    // Check if the request was successful
+    if (apiReponse?.payload?.success) {
       navigate("/");
+    } else if (apiReponse?.error) {
+      // Error is already shown by toast.promise in authSlice
+      console.error("Login failed:", apiReponse.error);
     }
   }
 

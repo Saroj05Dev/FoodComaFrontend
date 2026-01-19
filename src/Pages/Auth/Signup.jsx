@@ -83,10 +83,21 @@ function Signup() {
       return;
     }
 
-    const apiResponse = await dispatch(createAccount(signUpState));
+    // Filter out empty lastName if not provided (backend doesn't require it)
+    const submitData = { ...signUpState };
+    if (!submitData.lastName || submitData.lastName.trim() === "") {
+      delete submitData.lastName;
+    }
+
+    const apiResponse = await dispatch(createAccount(submitData));
     console.log("api response", apiResponse);
-    if (apiResponse.payload.data.success) {
+
+    // Check if the request was successful
+    if (apiResponse?.payload?.data?.success) {
       navigate("/auth/login");
+    } else if (apiResponse?.error) {
+      // Error is already shown by toast.promise in authSlice
+      console.error("Signup failed:", apiResponse.error);
     }
   }
 
