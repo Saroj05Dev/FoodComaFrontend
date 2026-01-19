@@ -38,9 +38,12 @@ function Login() {
       return;
     }
 
-    // Validate password minimum length
-    if (loginData.password.length < 8) {
-      toast.error("Password must be at least 8 characters long");
+    // Validate password (matching backend pattern: 8+ chars, uppercase, lowercase, number/special char)
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*(\d|\W)).{8,}$/;
+    if (!passwordRegex.test(loginData.password)) {
+      toast.error(
+        "Password must have at least 8 characters, one uppercase, one lowercase, and one number or special character"
+      );
       return;
     }
 

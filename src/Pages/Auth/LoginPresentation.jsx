@@ -186,7 +186,8 @@ function LoginPresentation({ handleFormSubmit, handleUserInput }) {
                   className="w-full px-3 py-1 mt-2 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out border border-gray-300 rounded outline-noe focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200"
                 />
                 <p className="mt-1 text-xs text-gray-500">
-                  Minimum 8 characters
+                  Min 8 characters, 1 uppercase, 1 lowercase, 1 number/special
+                  char
                 </p>
               </div>
 
